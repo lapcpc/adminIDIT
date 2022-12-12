@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar'
 import Contenido from '../components/Contenido'
 import Modal from '../components/Modal'
 export default function Home() {
+  //Pagin principal
   return (
     <div className='   h-screen flex-col grid grid-cols-7'>
     {/* Menu Lateral  */}

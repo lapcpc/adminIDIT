@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import React, { useState } from 'react'
 import { addCategoria } from '../firebase/firebaseService';
-
+//Pagina para añadir una categoria 
 function ContenidoA() {
   const color = "#00A2FF";
+
   const router = useRouter()
+//Variable donde se almacenara el formulario para añadir una maquina
   const [datos, setDatos] = useState({
     descripcion:'',
     color:'#00A2FF',
@@ -13,25 +15,27 @@ function ContenidoA() {
 
 
   })
+  //Funcion que administra el manejo de formularios
   const handleChange = (event)=>{
     setDatos({
       ...datos,
       [event.target.name] : event.target.value
   })
   }
+  //Funcion que administra el envio final del formulario
   const handleSubmit = async(e)=>{
     e.preventDefault();
     console.log(datos)
     
     addCategoria(datos)
-    
+    //Una vez añadida la cetegoria se navega a la pagina principal 
     router.replace("/");
   } 
   return (
     <div className='col-span-6 sm:col-span-5 bg-gray-100   h-full w-auto'>
 
     <div className='space-y-5 w-[100%] sm:w-[90%] lg:w-[70%] mx-auto'>
-    {/*  */}
+    {/* Formulario añadir mauqin */}
         <div className="w-full  mt-10">
           
       <form  className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

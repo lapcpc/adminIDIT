@@ -3,14 +3,17 @@ import { deleteDoc, doc } from 'firebase/firestore'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { db } from '../firebase/firebase'
+//Elemento que renderiza las diferentes maquinas de una categoria
 
 const Lista = ({details,tipo, showModal2, actualizar}) => {
     const router = useRouter()
+    //Solo en dev
     const deleteMaquina = async() =>{
         let isobasa = "maquinas" + tipo
         await deleteDoc(doc(db, isobasa, details.nombre));
         router.replace("/");
     }
+    // funcion que abre el modal para actualizar o eliminar una maquina
     const update = () =>{
       console.log(details)
       actualizar(details)

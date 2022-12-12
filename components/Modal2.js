@@ -5,8 +5,11 @@ import { updateMaquina } from '../firebase/firebaseService';
 import { deleteDoc, doc } from 'firebase/firestore'
 import { useRouter } from 'next/router';
 import { db } from '../firebase/firebase'
+//Modal para realizar una actualización de una maquina o eliminarla
 function Modal2({tipo, info,accion, mostrar, estado,nombre}) {
+  //Bandera para saber si de verdad quieres borrar la maquina
  const [deleteFlag, setDeleteFlag] = useState(false)
+ //Outline de datos previo a la actualizacino
   const [datos, setDatos] = useState({
     descripcion:'',
     color:'#00A2FF',
@@ -18,21 +21,28 @@ function Modal2({tipo, info,accion, mostrar, estado,nombre}) {
 
   })
   const router = useRouter()
-  
+  //Funcion para eliminar maquina
   const deleteMaquina = async() =>{
+    //tipo es el area de la maquina
     let isobasa = "maquinas" + tipo
+    //Al igual que tipo info viende los props del componente
+    //tipo son los datos de la maquina 
     await deleteDoc(doc(db, isobasa, info.nombre));
     router.replace("/");
 }
+//Funcion para administrar inputs
   const handleChange = (event)=>{
     setDatos({
       ...datos,
       [event.target.name] : event.target.value
   })
   }
+  //Funcion que se realiza cuando se envia el formualrio 
   const handleSubmit = async(e)=>{
     e.preventDefault();
+
     console.log(info)
+    
     setDatos((prevState) => {
       return {
         ...prevState,
@@ -45,11 +55,12 @@ function Modal2({tipo, info,accion, mostrar, estado,nombre}) {
     temp.nombre = info.nombre
 
     console.log(temp)
+    //Se añade el nombre de la informacino proporcinoada por parametros y luego se envia realiza la actualizacino
   
 
   updateMaquina(temp, tipo)
 
-    
+    //Se regresa a la pagina principal
     router.replace("/");
 
  
@@ -57,10 +68,11 @@ function Modal2({tipo, info,accion, mostrar, estado,nombre}) {
 
 
 
-
+    //Ciera modal
     const cambiar = () =>{
         estado()
     }
+    //La funcion hijo previende que la funcion onClick del padre sea ejecutada en el hijo
     const hijo =(e) =>{
         e.preventDefault();
         e.stopPropagation();
@@ -81,7 +93,7 @@ function Modal2({tipo, info,accion, mostrar, estado,nombre}) {
                       <TrashIcon className='w-7 h-7 text-red-500 cursor-pointer' onClick={()=> setDeleteFlag(true)} />
                     </div>
                   </div>
-              
+                {/* Renderizado condicional dependiendo si quieres actualizar o eliminar la maquina */}
                 {!deleteFlag ? (<>
                   <form  className=" shadow-md rounded px-8 pt-6 pb-8 mb-4">
                   

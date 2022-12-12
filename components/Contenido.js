@@ -1,6 +1,8 @@
 import React from 'react'
 import Modal from './Modal'
+//Contenido de la pagina principal
 function Contenido() {
+
   return (
     
     <div className='col-span-7 sm:col-span-6 bg-gray-100 space-y-5  h-full w-auto'>

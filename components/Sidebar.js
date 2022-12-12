@@ -4,7 +4,7 @@ import { HomeIcon } from '@heroicons/react/24/solid'
 import SidebarRow from './SidebarRow'
 import Desplegable from './Desplegable'
 import CuadroDespegable from './CuadroDespegable'
-
+// Barra lateral 
 const Sidebar = () => {
     const [active, setActive]=useState(false)
     
@@ -32,6 +32,7 @@ const Sidebar = () => {
             
            
         </div>
+        {/* Menu desplegable con las categorias */}
         <Desplegable accion={desactivar} activo={active}/>
         <CuadroDespegable activo={active}/>
         

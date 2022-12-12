@@ -8,11 +8,12 @@ import { addMaquina, getMaquinasCategoria } from '../firebase/firebaseService'
 import Modal from './Modal'
 import Modal2 from './Modal2'
 function ContenidoC({text}) {
-
+  //Variables que administran la visibilidad del modal 
   const [mostrar, setMostrar] = useState(false) 
   const [mostrar2, setMostrar2] = useState(false) 
+  //Variable donde se guardaran los datos de una maquina que se quiera actualizar
   const [temporal, setTemporal] = useState({nombre: ""})
-
+  //Variable donde se almacenan los datos de una maquina que se va a añadir
   const [datos, setDatos] = useState({
     descripcion:'',
     color:'#00A2FF',
@@ -23,33 +24,39 @@ function ContenidoC({text}) {
 
 
   })
+  //Se asignan los datos de una maquina a una variable temporal
   const actualizarTemporal = (x) => {
       setTemporal(x)
       console.log("Actualizacion realizada")
       console.log(temporal)
   }
+  //Funcinón para manejo de inputs
   const handleChange = (event)=>{
     setDatos({
       ...datos,
       [event.target.name] : event.target.value
   })
   }
+  //Función que se realiza cuando se termina de añadir una mauqina
   const handleSubmit = async(e)=>{
     e.preventDefault();
     console.log(datos)
     addMaquina(datos, text)
-    
+    //Despues de añadir a una maquina se navega a la pagina princial
     router.replace("/");
   } 
 
-
+//Variables para el manejo de la visibilidad de secciones
   const [section1, setSection1] = useState(true)
   const [section2, setSection2] = useState(true)
+  //Variable donde se almacenaran las diferentes secciones
   const [maquinas, setMaquinas] = useState(null)
   const router = useRouter();
+  //Funcion para eliminar una categoira
   const deleteCategoria = async() =>{
     console.log(text)
     await deleteDoc(doc(db, "Areas", text));
+    //Una vez eliminada la seccion se navega al inicio
     router.replace("/");
   }
 
@@ -57,7 +64,7 @@ function ContenidoC({text}) {
     if(!text){
       return
     }
-    
+    //Funcion para obtener los datos de una maquina por su categoria 
     getMaquinasCategoria(text).then(
      (x) => {
       console.log("***")
@@ -91,7 +98,7 @@ function ContenidoC({text}) {
       <div className='py-2 border shadow-md border-gray-200 rounded-md bg-white mx-5 my-10 justify-center'>
         <div className='flex flex-row m-3 '>
           <div className=' basis-3/4'>
-          <h1 className='pl-10 text-2xl'>Elimnar Maquinas</h1>
+          <h1 className='pl-10 text-2xl'>Maquinas</h1>
         
           </div>
           <div className='basis-1-4 cursor-pointer'>

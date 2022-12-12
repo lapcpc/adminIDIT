@@ -1,16 +1,19 @@
 import React from 'react'
 import { useState } from 'react'
 import { XMarkIcon } from '@heroicons/react/24/solid';
+//Modal para saber si estas seguro de elminar una categoria 
 function Modal({accion, mostrar, estado}) {
     
-
+    //Cierra el modal
     const cambiar = () =>{
         estado()
     }
+    //Evita que los evento onClick de un padre se realicen en un hijo
     const hijo =(e) =>{
         e.preventDefault();
         e.stopPropagation();
     }
+    //Elimina la categoria
     const eliminar = ()=> {
             accion()
     }
@@ -30,7 +33,7 @@ function Modal({accion, mostrar, estado}) {
                     <div className=' mx-auto w-min flex-col'>
                         <div className=' w-max space-x-3 mt-14'>
                         <button onClick={eliminar} className='p-3 bg-red-500 rounded-2xl px-6 text-white '>Si</button>
-                         <button onClick={cambiar} className='p-3 border border-zinc-400  rounded-2xl px-5 text-black
+                    <button onClick={cambiar} className='p-3 border border-zinc-400  rounded-2xl px-5 text-black
                     '>No</button>
                         </div>
                    

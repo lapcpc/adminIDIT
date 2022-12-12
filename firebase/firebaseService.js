@@ -9,19 +9,22 @@ import {   query, doc, getDoc, setDoc, getDocs,onSnapshot, collection, where, up
 import { async } from "@firebase/util";
 import { Timestamp } from "firebase/firestore";
 import { limit } from "firebase/firestore";
-
+//Añadir una categoria
 export const addCategoria = async(diccionario) =>{
     await setDoc(doc(db, "Areas", diccionario.nombre ), diccionario);
 
 }
+//Añadir una maquina
 export const addMaquina = async(diccionario, area) =>{
     let isobasa = "maquinas" + area
     await setDoc(doc(db, isobasa, diccionario.nombre ), diccionario);
 
 }
+//Actualizar una marquina, recibe un diccionario con el nombre de la maquina y los nuevos datos
 export const updateMaquina = async(diccionario, area) =>{
     console.log(area)
     let isobasa = "maquinas" + area
+    //Ejemplo: maquinasFABLAB
    
 
     console.log(diccionario)
@@ -32,6 +35,7 @@ await updateDoc(washingtonRef, diccionario);
 
 
 }
+//Obtener las maquinas de una categoria 
 export const getMaquinasCategoria= async(categoria) =>{
     console.log(categoria)
     const isobasa = "maquinas" + categoria

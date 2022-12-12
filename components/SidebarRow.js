@@ -1,6 +1,7 @@
 import React from 'react'
 
 function SidebarRow({Icon,text, active}) {
+  //Componente que renderiza un icono y su texto
   return (
     <div className='flex justify-center cursor-pointer'  >
         <div className=' justify-center flex-col  grid grid-cols-3 gap-4'>
